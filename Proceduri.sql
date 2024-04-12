@@ -9,7 +9,6 @@ CREATE PROCEDURE afisari_profit_policlinica()
   END //
 DELIMITER ;
 
-call afisari_profit_policlinica();
 
 drop procedure afisari_salarii_angajat;
 DELIMITER //
@@ -19,7 +18,6 @@ CREATE PROCEDURE afisari_salarii_angajat(id_angajat_val int )
     select an, luna , suma from salarii where id_angajat_val=salarii.id_angajat;
   END //
 DELIMITER ;
-call afisari_salarii_angajat(1);
 
 
 drop procedure if exists programare2;
@@ -122,7 +120,6 @@ END;
 //
 DELIMITER ;
 
-call print_pacienti('2012-12-12',1);
 
 
 drop procedure if exists print_raport_pacienti;
@@ -133,7 +130,7 @@ BEGIN
 END;
 //
 DELIMITER ;
-call print_raport_pacienti('12345678910');
+
 
 drop procedure if exists completare_raport;
 DELIMITER //
@@ -186,8 +183,6 @@ END;
 DELIMITER ;
 #in nume_p varchar(50),in prenume_p varchar(50), in nume_m varchar(50),in prenume_m varchar(50), in nume_a varchar(50),in prenume_a varchar(50), in data_cons date, in simptome text,in id_investigatie int ,in diagnostic varchar(50), in recomandari text)
 
-call completare_raport('Parau','Mihaela','Coman','Mircea','Asist','ent','2023-11-13','durere in gat',1,'rosu in gat','Sirop si pastile');
-call completare_raport('Parau','Mihaela','Coman','Mircea','Asist','ent','2023-11-13','durere de picior',2,'rosu in gat','pastile');
 
 DELIMITER //
 CREATE PROCEDURE parafare_raport(in nume_p varchar(50),in prenume_p varchar(50),in data_cons date, in parafa_val varchar(30))
@@ -207,13 +202,6 @@ WHERE id_raport = id;
 END;
 //
 DELIMITER ;
-
-
-insert into angajat  (id_angajat,cnp,nr_contract,functia,salariu,nr_ore) values
-(8,'12345678932',5,'medic',12000,30);
-
-insert into concedii(id,id_angajat,data_incepere,data_finalizare,nr_zile) values
-(1,1,'2023-02-05','2023-02-10',6);
 
 
 set FOREIGN_KEY_CHECKS=0;
@@ -258,27 +246,6 @@ END;
 DELIMITER ;
 set FOREIGN_KEY_CHECKS=0;
 
-insert into angajat  (id_angajat,cnp,nr_contract,functia,salariu,nr_ore) values
-(1,'12345678932',5,'medic',12000,30);
-insert into angajat  (id_angajat,cnp,nr_contract,functia,salariu,nr_ore) values
-(2,'12345678930',5,'medic',12500,30);
-insert into angajat  (id_angajat,cnp,nr_contract,functia,salariu,nr_ore) values
-(3,'12345678935',5,'medic',1000,30);
-insert into persoana  (CNP,nume,prenume,id_adresa,nr_telefon,email,IBAN) values
-('12345678932','Popa','Matei',1,'0712345690','email@yahoo.com','iBan212345');
-insert into persoana  (CNP,nume,prenume,id_adresa,nr_telefon,email,IBAN) values
-('12345678935','Popa','Matei',1,'0712345690','email@yahoo.com','iBan212345');
-insert into persoana  (CNP,nume,prenume,id_adresa,nr_telefon,email,IBAN) values
-('12345678930','Coman','Mircea',2,'0777777777','email123@yahoo.com','iBanok');
-insert into concedii(id,id_angajat,data_incepere,data_finalizare,nr_zile) values
-(1,3,'2023-02-05','2023-02-10',6);
-insert into program_angajat_unitate (id, id_angajat,id_unitate,timp_start,timp_finish) values
-(1,1,1,'08:00:00','15:00:00');
-insert into program_angajat_unitate (id, id_angajat,id_unitate,timp_start,timp_finish) values
-(3,1,2,'15:00:00','21:00:00');
-insert into program_angajat_unitate (id, id_angajat,id_unitate,timp_start,timp_finish) values
-(2,2,1,'15:00:00','21:00:00');
-call afisare_orar_inspector('Popa','Matei','medic');
 
 drop procedure if exists verificare_concediu;
 
@@ -297,13 +264,6 @@ END;
 //
 DELIMITER ;
 
-insert into concedii(id,id_angajat,data_incepere,data_finalizare,nr_zile) values
-(1,1,'2023-02-05','2023-02-10',6);
-insert into concedii(id,id_angajat,data_incepere,data_finalizare,nr_zile) values
-(2,1,'2023-03-05','2023-03-15',11);
-SET @rezultat = -1;
-call verificare_concediu('2023-03-08',1,@rezultat);
-select @rezultat;
 
 drop procedure print_concedii_angajat;
 
